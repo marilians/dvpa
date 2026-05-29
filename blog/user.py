@@ -51,7 +51,7 @@ class Register(MethodView):
             flash("Email Is Already Registered", "error")
             return render_template("auth/register.html", form_error="Email Is Already Registered")
 
-        hashed_password = hashlib.md5(password.encode()).hexdigest()
+        hashed_password = hashlib.md5(password.encode(‘utf-8’)).hexdigest()
 
         cur = db.connection.cursor()
         cur.execute(
