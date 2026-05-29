@@ -25,7 +25,7 @@ class PasswordChange(MethodView):
             flash("Password Not Match", "danger")
             return render_template(self.template_name)
 
-        hashed_password = hashlib.md5(password1.encode()).hexdigest()
+        hashed_password = hashlib.md5(password1.encode('utf-8')).hexdigest()
 
         cur = db.connection.cursor()
         cur.execute("UPDATE `users` SET `password` = %s WHERE `users`.`id` = %s", [hashed_password, session.get("id")])
